@@ -234,12 +234,12 @@ public class Timeline extends JPanel {
         
         if (currentHour > endHour || (currentHour == endHour && currentMinute > endMinute)) {// Passed
             return 1;
-        } else if (currentHour >= startHour && currentMinute >= startMinute) {// Current
-            if (currentHour <= endHour && currentMinute <= endMinute) {
+        } else if (currentHour > startHour || (currentHour == startHour && currentMinute >= startMinute)) {// Current
+            if (currentHour < endHour || (currentHour == endHour && currentMinute <= endMinute)) {
                 return 2;
             }
         }
-        return 0;
+        return 0;// Remaining
     }
     
     /*
@@ -373,6 +373,7 @@ final class listener implements ActionListener {
      */
     @Override
     public final void actionPerformed(final ActionEvent e) {
+        System.out.println("Refreshed page");
         this.timeline.refreshResults();
     }
 }
